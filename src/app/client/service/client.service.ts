@@ -32,7 +32,14 @@ export class ClientService {
     return this.clients.find(client => client.id === id);
   }
 
+  getLastId = ()=>{
+    return this.clients[this.clients.length - 1].id;
+  }
+
   //add
+  addClient = (client : IClient)=>{
+    this.clients = [...this.clients, client];
+  }
 
   //edit
 
