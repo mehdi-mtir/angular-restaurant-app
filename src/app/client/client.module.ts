@@ -5,6 +5,7 @@ import { ClientRoutingModule } from './client-routing.module';
 import { ListClientComponent } from './list-client/list-client.component';
 import { AddClientComponent } from './add-client/add-client.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { EditClientComponent } from './edit-client/edit-client.component';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    FormsModule
   ]
 })
 export class ClientModule { }

@@ -1,1 +1,24 @@
-<p>list-client works!</p>
+<h2>Liste des clients</h2>
+<button class="btn btn-success" [routerLink]="['/client', 'add']">Ajouter un client</button>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Email</th>
+      <th scope="col">Téléphone</th>
+      <th scope="col">Editer</th>
+      <th scope="col">Supprimer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of clients">
+      <th scope="row">{{client.id}}</th>
+      <td>{{client.nom}}</td>
+      <td>{{client.email}}</td>
+      <td>{{client.tel?client.tel:''}}</td>
+      <td><button class="btn btn-primary" [routerLink]="['/client', 'edit', client.id]">Editer</button></td>
+      <td><button class="btn btn-danger">Supprimer</button></td>
+    </tr>
+  </tbody>
+</table>

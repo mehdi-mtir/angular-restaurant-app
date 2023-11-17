@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-client',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-client.component.css']
 })
 export class AddClientComponent {
+
+  addClient = (f : NgForm) =>{
+    console.log(f);
+  }
 
 }
