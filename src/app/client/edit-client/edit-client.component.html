@@ -1,1 +1,24 @@
-<p>edit-client works!</p>
+<h2>Ajouter un client</h2>
+
+<form [formGroup]="editClientForm">
+  <div class="mb-3">
+    <label for="nom" class="form-label">Nom</label>
+    <input type="text" class="form-control" id="nom" name="nom" formControlName="nom">
+    <!--span class="error" *ngIf="n.invalid && n.touched">Le champ nom est obligatoire</span-->
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" formControlName="email">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Mot de passe</label>
+    <input type="password" class="form-control" id="password" name="password" formControlName="password">
+  </div>
+  <div class="mb-3">
+    <label for="tel" class="form-label">Téléphone</label>
+    <input type="tel" class="form-control" id="tel" name="tel" formControlName="tel">
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="editClientForm.invalid">Valider</button>
+</form>
+

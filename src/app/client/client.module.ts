@@ -5,7 +5,7 @@ import { ClientRoutingModule } from './client-routing.module';
 import { ListClientComponent } from './list-client/list-client.component';
 import { AddClientComponent } from './add-client/add-client.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ClientRoutingModule,
-    FormsModule
+    FormsModule, //Template-driven forms
+    ReactiveFormsModule //Reactive forms
   ]
 })
 export class ClientModule { }

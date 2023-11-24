@@ -24,12 +24,14 @@ export class ClientService {
 
   constructor() { }
 
-  getClients = ()=>{
+  getClients = () : IClient[]=>{
     return [...this.clients];
   }
 
-  getClientById = (id : number)=>{
-    return this.clients.find(client => client.id === id);
+  getClientById = (id : number)
+            : IClient | undefined=>{
+    return this.clients.find(client =>
+                          client.id === id);
   }
 
   getLastId = ()=>{
@@ -37,7 +39,7 @@ export class ClientService {
   }
 
   //add
-  addClient = (client : IClient)=>{
+  addClient = (client : IClient) : void=>{
     this.clients = [...this.clients, client];
   }
 
