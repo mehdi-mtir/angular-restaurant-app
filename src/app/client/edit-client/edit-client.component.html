@@ -1,10 +1,10 @@
 <h2>Ajouter un client</h2>
 
-<form [formGroup]="editClientForm">
+<form [formGroup]="editClientForm" (ngSubmit)="editClient()">
   <div class="mb-3">
     <label for="nom" class="form-label">Nom</label>
     <input type="text" class="form-control" id="nom" name="nom" formControlName="nom">
-    <!--span class="error" *ngIf="n.invalid && n.touched">Le champ nom est obligatoire</span-->
+    <span class="error" *ngIf="editClientForm.get('nom')!.invalid && editClientForm.get('nom')!.touched">Le champ nom est obligatoire</span>
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>

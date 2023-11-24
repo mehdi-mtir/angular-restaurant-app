@@ -18,6 +18,20 @@ export class EditClientComponent implements OnInit {
     private service : ClientService,
     private router : Router){}
 
+  editClient(){
+    const values = this.editClientForm.value;
+    this.service.editClient(
+      {
+        id :this.client!.id,
+        nom : values.nom,
+        email : values.email,
+        password : values.password,
+        tel : values.tel
+      } as IClient
+    );
+    this.router.navigate(['/client']);
+  }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
       parametres => {

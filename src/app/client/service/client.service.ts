@@ -44,6 +44,11 @@ export class ClientService {
   }
 
   //edit
+  editClient = (client : IClient) : void=>{
+    this.clients = this.clients.map(
+      cl=>cl.id===client.id?client:cl
+    )
+  }
 
   //delete
 }
