@@ -18,7 +18,7 @@
       <td>{{client.email}}</td>
       <td>{{client.tel?client.tel:''}}</td>
       <td><button class="btn btn-primary" [routerLink]="['/client', 'edit', client.id]">Editer</button></td>
-      <td><button class="btn btn-danger">Supprimer</button></td>
+      <td><button class="btn btn-danger" (click)="deleteClient(client.id)">Supprimer</button></td>
     </tr>
   </tbody>
 </table>

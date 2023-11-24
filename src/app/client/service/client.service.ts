@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IClient } from '../model/iclient';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,8 @@ export class ClientService {
       tel:'98333444'
     }
   ];
+
+  clientsArrayEdited = new Subject<IClient[]>();
 
   constructor() { }
 
@@ -51,4 +54,13 @@ export class ClientService {
   }
 
   //delete
+  deleteClient = (id : number) : void => {
+    this.clients = this.clients.filter(
+      cl=>cl.id !== id
+    )
+    this.clientsArrayEdited.next([...this.clients]);
+    /*const indice = this.clients.findIndex(cl=>cl.id===id)
+    this.clients.splice(indice, 1)*/
+    //console.log(this.clients);
+  }
 }
