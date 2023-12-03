@@ -1,5 +1,5 @@
 <h2>Liste des clients</h2>
-<button class="btn btn-success" [routerLink]="['/client', 'add']">Ajouter un client</button>
+<button class="btn btn-success" [routerLink]="['/clients', 'add']">Ajouter un client</button>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -17,7 +17,7 @@
       <td>{{client.nom}}</td>
       <td>{{client.email}}</td>
       <td>{{client.tel?client.tel:''}}</td>
-      <td><button class="btn btn-primary" [routerLink]="['/client', 'edit', client.id]">Editer</button></td>
+      <td><button class="btn btn-primary" [routerLink]="['/clients', 'edit', client.id]">Editer</button></td>
       <td><button class="btn btn-danger" (click)="deleteClient(client.id)">Supprimer</button></td>
     </tr>
   </tbody>

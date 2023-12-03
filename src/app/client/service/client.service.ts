@@ -1,34 +1,41 @@
 import { Injectable } from '@angular/core';
 import { IClient } from '../model/iclient';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IClientDTO } from '../model/i-client-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  private clients : IClient[] = [
-    {
-      id:1,
-      nom: 'Mohamed Tounsi',
-      email : 'mohamed.tounsi@gmail.com',
-      password : 'moh123456789',
-      tel:'98111222'
-    },
-    {
-      id:2,
-      nom: 'Maha Ben Azzouz',
-      email : 'maha.benazzouz@gmail.com',
-      password : 'mah987654',
-      tel:'98333444'
-    }
-  ];
+  private clients : IClient[] = [];
+  private url = "http://localhost:3000/clients";
+  options = {headers : new HttpHeaders(
+    {'content-type' : "application/json"}
+  )}
 
   clientsArrayEdited = new Subject<IClient[]>();
 
-  constructor() { }
+  constructor(private http : HttpClient) { }
 
   getClients = () : IClient[]=>{
+
+    this.http.get<IClient[]>(this.url).subscribe(
+      {
+        next :
+          (clients)=> {
+            this.clients = clients;
+            //Informer les composants concernés que le tableau a été modifié
+            this.clientsArrayEdited.next([...this.clients])
+          }
+          ,
+        error : (err)=>console.log(err),
+        complete : ()=>console.log("Request completed!")
+      }
+    )
+
     return [...this.clients];
+
   }
 
   getClientById = (id : number)
@@ -42,23 +49,53 @@ export class ClientService {
   }
 
   //add
-  addClient = (client : IClient) : void=>{
-    this.clients = [...this.clients, client];
+  addClient = (client : IClientDTO) : void=>{
+
+    this.http.post<IClient>(this.url, client, this.options).subscribe(
+      {
+        next : client => {
+          this.clients = [...this.clients, client];
+          this.clientsArrayEdited.next([...this.clients])
+        },
+        error : (err)=>console.log(err),
+        complete : ()=>console.log("Request completed!")
+      }
+    )
+
   }
 
   //edit
   editClient = (client : IClient) : void=>{
-    this.clients = this.clients.map(
-      cl=>cl.id===client.id?client:cl
-    )
+    this.http.put<IClient>(`${this.url}/${client.id}`,
+      {
+        nom : client.nom,
+        email : client.email,
+        password : client.password,
+        tel : client.tel
+      },
+      this.options ).subscribe(
+        client => {
+          this.clients = this.clients.map(
+                cl=>cl.id===client.id?client:cl
+              )
+          this.clientsArrayEdited.next([...this.clients])
+        }
+      )
+
+
   }
 
   //delete
   deleteClient = (id : number) : void => {
-    this.clients = this.clients.filter(
-      cl=>cl.id !== id
+    this.http.delete(`${this.url}/${id}`).subscribe(
+      ()=>{
+        this.clients = this.clients.filter(
+          cl=>cl.id !== id
+        )
+        this.clientsArrayEdited.next([...this.clients]);
+      }
     )
-    this.clientsArrayEdited.next([...this.clients]);
+
     /*const indice = this.clients.findIndex(cl=>cl.id===id)
     this.clients.splice(indice, 1)*/
     //console.log(this.clients);

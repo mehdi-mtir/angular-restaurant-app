@@ -29,7 +29,7 @@ export class EditClientComponent implements OnInit {
         tel : values.tel
       } as IClient
     );
-    this.router.navigate(['/client']);
+    this.router.navigate(['/clients']);
   }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class EditClientComponent implements OnInit {
         this.client =
           this.service.getClientById(+parametres['id']);
         if(this.client === undefined)
-          this.router.navigate(['/client']);
+          this.router.navigate(['/clients']);
         //console.log(this.client);
 
         this.editClientForm = new FormGroup({

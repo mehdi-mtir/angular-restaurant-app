@@ -4,17 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 //Lazy loading
 const routes: Routes = [
   {
-    path : 'client',
+    path : 'clients',
     loadChildren : ()=>import('./client/client.module')
                       .then(m => m.ClientModule)
   },
   {
-    path : 'produit',
+    path : 'produits',
     loadChildren : ()=>import('./produit/produit.module')
                       .then(m => m.ProduitModule)
   },
   {
-    path : 'commande',
+    path : 'commandes',
     loadChildren : ()=>import('./commande/commande.module')
                       .then(m => m.CommandeModule)
   },

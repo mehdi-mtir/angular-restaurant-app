@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ClientService } from '../service/client.service';
-import { IClient } from '../model/iclient';
+import { IClientDTO } from '../model/i-client-dto';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,14 +17,13 @@ export class AddClientComponent {
   addClient = (f : NgForm) =>{
     //console.log(f);
     const newClient = {
-      id : this.clientService.getLastId() + 1,
       nom : f.value.nom,
       email : f.value.email,
       password : f.value.password,
       tel : f.value.tel
-    } as IClient;
+    } as IClientDTO;
     this.clientService.addClient(newClient);
-    this.router.navigate(['/client']);
+    this.router.navigate(['/clients']);
   }
 
 }
