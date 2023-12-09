@@ -9,9 +9,13 @@ import { IClientDTO } from '../model/i-client-dto';
 })
 export class ClientService {
   private clients : IClient[] = [];
-  private url = "http://localhost:3000/clients";
+  private url = "http://localhost:3000/660/clients";
   options = {headers : new HttpHeaders(
-    {'content-type' : "application/json"}
+    {
+      'content-type' : "application/json",
+      'Authorization' : 'Bearer ' + window.localStorage.getItem('accessToken')
+    }
+
   )}
 
   clientsArrayEdited = new Subject<IClient[]>();
@@ -20,7 +24,7 @@ export class ClientService {
 
   getClients = () : IClient[]=>{
 
-    this.http.get<IClient[]>(this.url).subscribe(
+    this.http.get<IClient[]>(this.url, this.options).subscribe(
       {
         next :
           (clients)=> {
@@ -87,7 +91,7 @@ export class ClientService {
 
   //delete
   deleteClient = (id : number) : void => {
-    this.http.delete(`${this.url}/${id}`).subscribe(
+    this.http.delete(`${this.url}/${id}`, this.options).subscribe(
       ()=>{
         this.clients = this.clients.filter(
           cl=>cl.id !== id

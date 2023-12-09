@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './shared/login/login.component';
 
 //Lazy loading
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
     loadChildren : ()=>import('./commande/commande.module')
                       .then(m => m.CommandeModule)
   },
-  {path: '', redirectTo : 'client', pathMatch:'full'}
+  {path : 'login', component : LoginComponent},
+  {path: '', redirectTo : 'login', pathMatch:'full'}
 ];
 
 @NgModule({
